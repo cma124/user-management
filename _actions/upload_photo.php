@@ -21,8 +21,12 @@ if($error) {
 }
 
 if($type === "image/jpeg" || $type === "image/png") {
+  $name = uniqid() . '_' . $name;
   $table->updatePhoto($auth->id, $name);
+
   move_uploaded_file($tmp, "photos/$name");
+  unlink('photos/' . $auth->photo);
+
   $auth->photo = $name;
   HTTP::redirect("/profile.php");
 } else {

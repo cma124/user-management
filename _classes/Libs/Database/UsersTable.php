@@ -55,6 +55,35 @@ class UsersTable {
     return $row ?? false;
   }
 
+  public function updateProfile($id, $data) {
+    $statement = $this->db->prepare("
+      UPDATE users SET name = :name, email = :email, phone = :phone, address = :address WHERE id = :id
+    ");
+
+    $statement->execute([
+      ':id' => $id,
+      ':name' => $data['name'],
+      ':email' => $data['email'],
+      ':phone' => $data['phone'],
+      ':address' => $data['address']
+    ]);
+
+    return $statement->rowCount();
+  }
+
+  public function updatePassword($id, $newPassword) {
+    $statement = $this->db->prepare("
+      UPDATE users SET password = :password WHERE id = :id
+    ");
+
+    $statement->execute([
+      ':password' => md5($newPassword),
+      ':id' => $id
+    ]);
+
+    return $statement->rowCount();
+  }
+
   public function updatePhoto($id, $name) {
     $statement = $this->db->prepare("
       UPDATE users SET photo = :name WHERE id = :id
@@ -62,6 +91,19 @@ class UsersTable {
 
     $statement->execute([
       ':name' => $name,
+      ':id' => $id
+    ]);
+
+    return $statement->rowCount();
+  }
+
+  public function deletePhoto($id, $emptyValue) {
+    $statement = $this->db->prepare("
+      UPDATE users SET photo = :value WHERE id = :id
+    ");
+
+    $statement->execute([
+      ':value' => $emptyValue,
       ':id' => $id
     ]);
 

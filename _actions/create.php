@@ -11,7 +11,7 @@ $data = [
   "email" => $_POST['email'] ?? 'Unknown',
   "phone" => $_POST['phone'] ?? 'Unknown',
   "address" => $_POST['address'] ?? 'Unknown',
-  "password" => md5($_POST['password']),
+  "password" => $_POST['password'] ? md5($_POST['password']) : md5('password'),
   "role_id" => 1
 ];
 

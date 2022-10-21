@@ -13,7 +13,6 @@ $table = new UsersTable(new MySQL);
 
 $id = $_GET['id'];
 $role = $_GET['role'];
-print_r($_GET);
 $table->changeRole($id, $role);
 
 HTTP::redirect("/admin.php");

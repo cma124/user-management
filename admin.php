@@ -19,10 +19,13 @@ $auth = Auth::check();
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin | PHP Project</title>
+  <title>Admin | User Management</title>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <!-- Bootstrap JS -->
+  <script src="js/bootstrap.bundle.min.js" defer></script>
 </head>
 <body>
   <div class="container">
@@ -83,14 +86,16 @@ $auth = Auth::check();
                   <a href="_actions/role.php?id=<?= $user->id ?>&role=3" class="dropdown-item">Admin</a>
                 </div>
 
-                <?php if($user->suspended) : ?>
-                  <a href="_actions/unsuspend.php?id=<?= $user->id ?>" class="btn btn-sm btn-danger">Suspended</a>
-                <?php else : ?>
-                  <a href="_actions/suspend.php?id=<?= $user->id ?>" class="btn btn-sm btn-outline-success">Active</a>
-                <?php endif ?>
-
                 <?php if($user->id !== $auth->id) : ?>
-                  <a href="_actions/delete.php?id=<?= $user->id ?>" class="btn btn-sm btn-outline-danger" onClick="return confirm('Are you sure?')">Delete</a>
+                  <?php if($user->suspended) : ?>
+                    <a href="_actions/unsuspend.php?id=<?= $user->id ?>" class="ms-1 btn btn-sm btn-danger">Suspended</a>
+                  <?php else : ?>
+                    <a href="_actions/suspend.php?id=<?= $user->id ?>" class="ms-1 btn btn-sm btn-outline-success">Activate</a>
+                  <?php endif ?>
+
+                  <?php if($auth->value > 2) : ?>
+                    <a href="_actions/delete.php?id=<?= $user->id ?>" class="ms-1 btn btn-sm btn-outline-danger" onClick="return confirm('Are you sure?')">Delete</a>
+                  <?php endif ?>
                 <?php endif ?>
               </div>
 
@@ -103,6 +108,4 @@ $auth = Auth::check();
     </table>
   </div>
 </body>
-<!-- Bootstrap JS -->
-<script src="js/bootstrap.bundle.min.js"></script>
 </html>

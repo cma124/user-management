@@ -6,17 +6,13 @@ use PDO;
 use PDOException;
 
 class MySQL {
-  private $dbhost;
-  private $dbuser;
-  private $dbname;
-  private $dbpass;
   private $db;
 
   public function __construct(
-    $dbhost = "localhost",
-    $dbuser = "root",
-    $dbname = "project",
-    $dbpass = ""
+    private $dbhost = "localhost",
+    private $dbuser = "root",
+    private $dbname = "user_management",
+    private $dbpass = ""
   ) {
     $this->dbhost = $dbhost;
     $this->dbuser = $dbuser;

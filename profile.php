@@ -14,10 +14,13 @@ $auth = Auth::check();
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile | PHP Project</title>
+  <title>Profile | User Management</title>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <!-- Bootstrap JS -->
+  <script src="js/bootstrap.bundle.min.js" defer></script>
 </head>
 <body>
   <div class="container">
@@ -25,18 +28,35 @@ $auth = Auth::check();
       <?= $auth->name ?>
       
       <span class="fw-normal text-muted">
-        <?= $auth->role ?>
+        ( <?= $auth->role ?> )
       </span>
     </h1>
 
+    <?php if(isset($_GET['update'])) : ?>
+      <div class="alert alert-success alert-dismissible fade show">
+        Account updated successfully.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <?php endif ?>
+
+    <?php if(isset($_GET['password'])) : ?>
+      <div class="alert alert-success alert-dismissible fade show">
+        Password changed successfully.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <?php endif ?>
+
     <?php if(isset($_GET['error'])) : ?>
-      <div class="alert alert-warning">
-        Cannot Upload File !
+      <div class="alert alert-warning alert-dismissible fade show">
+        Cannot upload file !
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     <?php endif ?>
 
     <?php if($auth->photo) : ?>
       <img src="_actions/photos/<?= $auth->photo ?>" alt="Profile Picture" class="img-thumbnail mb-3" width="200">
+    <?php else : ?>
+      <img src="_actions/photos/default-image.png" alt="Profile Picture" class="img-thumbnail mb-3" width="200">
     <?php endif ?>
 
     <form action="_actions/upload_photo.php" method="post" enctype="multipart/form-data">
@@ -66,6 +86,7 @@ $auth = Auth::check();
     <br>
 
     <a href="admin.php" class="btn btn-warning">Manage Users</a>
+    <a href="edit.php" class="btn btn-info">Edit Profile</a>
     <a href="_actions/logout.php" class="btn btn-danger">Logout</a>
   </div>
 </body>

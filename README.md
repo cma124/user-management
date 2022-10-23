@@ -2,23 +2,23 @@
 
 User management system with three different roles - **Admin**, **Manager** and **User**
 
-## User
+## What user can do
 
--   Can create or register account
--   Can update profile information
--   Can upload or delete profile image
--   Can check account list
+-   Login or register account
+-   Update profile information
+-   Upload or delete profile image
+-   Check account list
 
-## Manager
+## What manager can do
 
--   Same functions as **User** role
--   Can change accounts into different role
--   Can suspend or activate accounts
+-   Same actions as **User** role
+-   Change accounts into different role
+-   Suspend or activate other accounts
 
-## Admin
+## What admin can do
 
--   Same functions as **Manager** role
--   Can delete other accounts
+-   Same actions as **Manager** role
+-   Delete other accounts
 
 ## Languages
 
